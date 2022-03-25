@@ -34,18 +34,24 @@ import org.apache.spark.util.Utils
  * If you use it as a template to create your own app, please use `spark-submit` to submit your app.
  *
  * Note: This script treats all features as real-valued (not categorical).
- *       To include categorical features, modify categoricalFeaturesInfo.
+ * To include categorical features, modify categoricalFeaturesInfo.
+ *
+ * 使用决策树作为弱学习器的梯度提升示例运行器。运行
+ * ./bin/run-example mllib.GradientBoostedTreesRunner [options]
+ *
+ * 如果您使用它作为模板来创建自己的应用程序，请使用spark-submit提交您的应用程序。
+ * 注意：此脚本将所有特征视为实值（非分类）。要包含分类特征，请修改 categoricalFeaturesInfo。
  */
 object GradientBoostedTreesRunner {
 
   case class Params(
-      input: String = null,
-      testInput: String = "",
-      dataFormat: String = "libsvm",
-      algo: String = "Classification",
-      maxDepth: Int = 5,
-      numIterations: Int = 10,
-      fracTest: Double = 0.2) extends AbstractParams[Params]
+                     input: String = null,
+                     testInput: String = "",
+                     dataFormat: String = "libsvm",
+                     algo: String = "Classification",
+                     maxDepth: Int = 5,
+                     numIterations: Int = 10,
+                     fracTest: Double = 0.2) extends AbstractParams[Params]
 
   def main(args: Array[String]) {
     val defaultParams = Params()

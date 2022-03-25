@@ -22,7 +22,11 @@ import scala.reflect.runtime.universe._
 /**
  * Abstract class for parameter case classes.
  * This overrides the [[toString]] method to print all case class fields by name and value.
- * @tparam T  Concrete parameter class.
+ *
+ * @tparam T Concrete parameter class.
+ *           参数案例类的抽象类。这将覆盖toString方法以按名称和值打印所有案例类字段。
+ *           类型参数：
+ *           T——具体参数类。
  */
 abstract class AbstractParams[T: TypeTag] {
 
@@ -31,9 +35,9 @@ abstract class AbstractParams[T: TypeTag] {
   /**
    * Finds all case class fields in concrete class instance, and outputs them in JSON-style format:
    * {
-   *   [field name]:\t[field value]\n
-   *   [field name]:\t[field value]\n
-   *   ...
+   * [field name]:\t[field value]\n
+   * [field name]:\t[field value]\n
+   * ...
    * }
    */
   override def toString: String = {

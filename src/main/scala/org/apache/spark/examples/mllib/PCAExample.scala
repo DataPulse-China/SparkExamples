@@ -26,6 +26,9 @@ import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.{LabeledPoint, LinearRegressionWithSGD}
 // $example off$
 
+/**
+ * PCA 示例
+ */
 @deprecated("Deprecated since LinearRegressionWithSGD is deprecated.  Use ml.feature.PCA", "2.0.0")
 object PCAExample {
 

@@ -24,6 +24,9 @@ import org.apache.spark.mllib.recommendation.{ALS, Rating}
 // $example off$
 import org.apache.spark.sql.SparkSession
 
+/**
+ * 排名指标示例
+ */
 object RankingMetricsExample {
   def main(args: Array[String]) {
     val spark = SparkSession

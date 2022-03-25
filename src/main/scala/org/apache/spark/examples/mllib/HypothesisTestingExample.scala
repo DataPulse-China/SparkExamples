@@ -27,6 +27,9 @@ import org.apache.spark.mllib.stat.test.ChiSqTestResult
 import org.apache.spark.rdd.RDD
 // $example off$
 
+/**
+ * 假设检验示例
+ */
 object HypothesisTestingExample {
 
   def main(args: Array[String]) {

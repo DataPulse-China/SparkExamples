@@ -24,6 +24,9 @@ import org.apache.spark.mllib.clustering.{GaussianMixture, GaussianMixtureModel}
 import org.apache.spark.mllib.linalg.Vectors
 // $example off$
 
+/**
+ * 高斯混合示例
+ */
 object GaussianMixtureExample {
 
   def main(args: Array[String]) {

@@ -25,6 +25,9 @@ import org.apache.spark.mllib.tree.model.DecisionTreeModel
 import org.apache.spark.mllib.util.MLUtils
 // $example off$
 
+/**
+ * 决策树分类示例
+ */
 object DecisionTreeClassificationExample {
 
   def main(args: Array[String]): Unit = {

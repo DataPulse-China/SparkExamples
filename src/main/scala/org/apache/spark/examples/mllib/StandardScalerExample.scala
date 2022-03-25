@@ -26,6 +26,9 @@ import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.util.MLUtils
 // $example off$
 
+/**
+ * 标准缩放器示例
+ */
 object StandardScalerExample {
 
   def main(args: Array[String]): Unit = {

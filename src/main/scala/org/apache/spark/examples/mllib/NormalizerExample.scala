@@ -25,6 +25,9 @@ import org.apache.spark.mllib.feature.Normalizer
 import org.apache.spark.mllib.util.MLUtils
 // $example off$
 
+/**
+ * 规范化器示例
+ */
 object NormalizerExample {
 
   def main(args: Array[String]): Unit = {

@@ -31,6 +31,11 @@ import org.apache.spark.mllib.linalg.Vectors
  * ./bin/run-example org.apache.spark.examples.mllib.DenseKMeans [options] <input>
  * }}}
  * If you use it as a template to create your own app, please use `spark-submit` to submit your app.
+ *
+ * 一个示例 k-means 应用程序。运行
+ * ./bin/run-example org.apache.spark.examples.mllib.DenseKMeans [options] <input>
+ *
+ * 如果您使用它作为模板来创建自己的应用程序，请使用spark-submit提交您的应用程序
  */
 object DenseKMeans {
 
@@ -42,10 +47,10 @@ object DenseKMeans {
   import InitializationMode._
 
   case class Params(
-      input: String = null,
-      k: Int = -1,
-      numIterations: Int = 10,
-      initializationMode: InitializationMode = Parallel) extends AbstractParams[Params]
+                     input: String = null,
+                     k: Int = -1,
+                     numIterations: Int = 10,
+                     initializationMode: InitializationMode = Parallel) extends AbstractParams[Params]
 
   def main(args: Array[String]) {
     val defaultParams = Params()
@@ -61,7 +66,7 @@ object DenseKMeans {
         .action((x, c) => c.copy(numIterations = x))
       opt[String]("initMode")
         .text(s"initialization mode (${InitializationMode.values.mkString(",")}), " +
-        s"default: ${defaultParams.initializationMode}")
+          s"default: ${defaultParams.initializationMode}")
         .action((x, c) => c.copy(initializationMode = InitializationMode.withName(x)))
       arg[String]("<input>")
         .text("input paths to examples")

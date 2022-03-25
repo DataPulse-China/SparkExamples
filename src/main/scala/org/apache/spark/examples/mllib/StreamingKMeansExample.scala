@@ -40,15 +40,21 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
  * Where y is some identifier. n must be the same for train and test.
  *
  * Usage:
- *   StreamingKMeansExample <trainingDir> <testDir> <batchDuration> <numClusters> <numDimensions>
+ * StreamingKMeansExample <trainingDir> <testDir> <batchDuration> <numClusters> <numDimensions>
  *
  * To run on your local machine using the two directories `trainingDir` and `testDir`,
  * with updates every 5 seconds, 2 dimensions per data point, and 3 clusters, call:
- *    $ bin/run-example mllib.StreamingKMeansExample trainingDir testDir 5 3 2
+ * $ bin/run-example mllib.StreamingKMeansExample trainingDir testDir 5 3 2
  *
  * As you add text files to `trainingDir` the clusters will continuously update.
  * Anytime you add text files to `testDir`, you'll see predicted labels using the current model.
  *
+ * 估计一个数据流上的集群并在另一个数据流上进行预测，其中数据流作为文本文件到达两个不同的目录。
+ * 训练文本文件的行必须是[x1,x2,x3,...,xn]形式的矢量数据，其中 n 是维数。
+ * 测试文本文件的行必须以(y,[x1,x2,x3,...,xn])形式标记数据，其中 y 是某个标识符。训练和测试的 n 必须相同。
+ * 用法：StreamingKMeansExample          要使用两个目录 trainingDir和 testDir在本地计算机上运行，​​每 5 秒更新一次，
+ * 每个数据点 2 个维度和 3 个集群，请调用： $ bin/run-example mllib.StreamingKMeansExample trainingDir testDir 5 3 2
+ * 添加文本时文件到 trainingDir集群将不断更新。每当您将文本文件添加到 testDir时，您都会看到使用当前模型的预测标签。
  */
 object StreamingKMeansExample {
 

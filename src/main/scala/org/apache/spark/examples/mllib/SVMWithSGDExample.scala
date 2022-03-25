@@ -25,6 +25,9 @@ import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
 import org.apache.spark.mllib.util.MLUtils
 // $example off$
 
+/**
+ * SVM 与 SGD 示例
+ */
 object SVMWithSGDExample {
 
   def main(args: Array[String]): Unit = {

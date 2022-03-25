@@ -29,6 +29,11 @@ import org.apache.spark.mllib.util.MLUtils
  * bin/run-example org.apache.spark.examples.mllib.SampledRDDs
  * }}}
  * If you use it as a template to create your own app, please use `spark-submit` to submit your app.
+ *
+ * 随机生成和采样 RDD 的示例应用程序。运行
+ * bin/run-example org.apache.spark.examples.mllib.SampledRDDs
+ *
+ * 如果您使用它作为模板来创建自己的应用程序，请使用spark-submit提交您的应用程序。
  */
 object SampledRDDs {
 
@@ -45,10 +50,10 @@ object SampledRDDs {
         .action((x, c) => c.copy(input = x))
       note(
         """
-        |For example, the following command runs this app:
-        |
-        | bin/spark-submit --class org.apache.spark.examples.mllib.SampledRDDs \
-        |  examples/target/scala-*/spark-examples-*.jar
+          |For example, the following command runs this app:
+          |
+          | bin/spark-submit --class org.apache.spark.examples.mllib.SampledRDDs \
+          |  examples/target/scala-*/spark-examples-*.jar
         """.stripMargin)
     }
 

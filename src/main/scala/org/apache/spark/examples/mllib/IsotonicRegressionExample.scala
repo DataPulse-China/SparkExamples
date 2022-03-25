@@ -24,6 +24,9 @@ import org.apache.spark.mllib.regression.{IsotonicRegression, IsotonicRegression
 import org.apache.spark.mllib.util.MLUtils
 // $example off$
 
+/**
+ * 等渗回归示例
+ */
 object IsotonicRegressionExample {
 
   def main(args: Array[String]): Unit = {

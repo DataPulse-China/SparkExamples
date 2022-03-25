@@ -24,6 +24,9 @@ import org.apache.spark.mllib.fpm.FPGrowth
 import org.apache.spark.rdd.RDD
 // $example off$
 
+/**
+ * 简单的 FP 增长
+ */
 object SimpleFPGrowth {
 
   def main(args: Array[String]) {

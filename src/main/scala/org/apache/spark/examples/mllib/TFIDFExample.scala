@@ -26,6 +26,9 @@ import org.apache.spark.mllib.linalg.Vector
 import org.apache.spark.rdd.RDD
 // $example off$
 
+/**
+ * TFIDF 示例
+ */
 object TFIDFExample {
 
   def main(args: Array[String]): Unit = {

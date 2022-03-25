@@ -35,18 +35,22 @@ import org.apache.spark.rdd.RDD
  * }}}
  * A synthetic dataset in MovieLens format can be found at `data/mllib/sample_movielens_data.txt`.
  * If you use it as a template to create your own app, please use `spark-submit` to submit your app.
+ * MovieLens 数据上的 ALS 示例应用程序 (http://grouplens.org/datasets/movielens/)。运行
+ * bin/run-example org.apache.spark.examples.mllib.MovieLensALS
+ *
+ * 可以在data/mllib/sample_movielens_data.txt中找到 MovieLens 格式的合成数据集。如果您使用它作为模板来创建自己的应用程序，请使用spark-submit提交您的应用程序。
  */
 object MovieLensALS {
 
   case class Params(
-      input: String = null,
-      kryo: Boolean = false,
-      numIterations: Int = 20,
-      lambda: Double = 1.0,
-      rank: Int = 10,
-      numUserBlocks: Int = -1,
-      numProductBlocks: Int = -1,
-      implicitPrefs: Boolean = false) extends AbstractParams[Params]
+                     input: String = null,
+                     kryo: Boolean = false,
+                     numIterations: Int = 20,
+                     lambda: Double = 1.0,
+                     rank: Int = 10,
+                     numUserBlocks: Int = -1,
+                     numProductBlocks: Int = -1,
+                     implicitPrefs: Boolean = false) extends AbstractParams[Params]
 
   def main(args: Array[String]) {
     val defaultParams = Params()
@@ -175,18 +179,18 @@ object MovieLensALS {
 
   /** Compute RMSE (Root Mean Squared Error). */
   def computeRmse(model: MatrixFactorizationModel, data: RDD[Rating], implicitPrefs: Boolean)
-    : Double = {
+  : Double = {
 
     def mapPredictedRating(r: Double): Double = {
       if (implicitPrefs) math.max(math.min(r, 1.0), 0.0) else r
     }
 
     val predictions: RDD[Rating] = model.predict(data.map(x => (x.user, x.product)))
-//    val predictionsAndRatings = predictions.map{ x =>
-//      ((x.user, x.product), mapPredictedRating(x.rating))
-//    }.join(data.map(x => ((x.user, x.product), x.rating))).values
-//    math.sqrt(predictionsAndRatings.map(x => (x._1 - x._2) * (x._1 - x._2)).mean())
-    1
+    //    val predictionsAndRatings = predictions.map { x =>
+    //      ((x.user, x.product), mapPredictedRating(x.rating))
+    //    }.join(data.map(x => ((x.user, x.product), x.rating))).values
+    //    math.sqrt(predictionsAndRatings.map(x => (x._1 - x._2) * (x._1 - x._2)).mean())
+    null
   }
 }
 // scalastyle:on println

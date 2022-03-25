@@ -24,6 +24,9 @@ import org.apache.spark.mllib.stat.KernelDensity
 import org.apache.spark.rdd.RDD
 // $example off$
 
+/**
+ * 核密度估计示例
+ */
 object KernelDensityEstimationExample {
 
   def main(args: Array[String]): Unit = {

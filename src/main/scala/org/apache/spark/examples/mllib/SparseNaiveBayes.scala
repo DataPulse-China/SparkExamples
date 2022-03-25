@@ -31,14 +31,18 @@ import org.apache.spark.mllib.util.MLUtils
  * ./bin/run-example org.apache.spark.examples.mllib.SparseNaiveBayes [options] <input>
  * }}}
  * If you use it as a template to create your own app, please use `spark-submit` to submit your app.
+ * 一个示例朴素贝叶斯应用程序。运行
+ * ./bin/run-example org.apache.spark.examples.mllib.SparseNaiveBayes [options] <input>
+ *
+ * 如果您使用它作为模板来创建自己的应用程序，请使用spark-submit提交您的应用程序。
  */
 object SparseNaiveBayes {
 
   case class Params(
-      input: String = null,
-      minPartitions: Int = 0,
-      numFeatures: Int = -1,
-      lambda: Double = 1.0) extends AbstractParams[Params]
+                     input: String = null,
+                     minPartitions: Int = 0,
+                     numFeatures: Int = -1,
+                     lambda: Double = 1.0) extends AbstractParams[Params]
 
   def main(args: Array[String]) {
     val defaultParams = Params()

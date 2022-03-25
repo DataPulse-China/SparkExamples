@@ -24,6 +24,9 @@ import org.apache.spark.mllib.classification.{NaiveBayes, NaiveBayesModel}
 import org.apache.spark.mllib.util.MLUtils
 // $example off$
 
+/**
+ * 朴素贝叶斯示例
+ */
 object NaiveBayesExample {
 
   def main(args: Array[String]): Unit = {

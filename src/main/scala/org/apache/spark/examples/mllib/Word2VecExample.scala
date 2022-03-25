@@ -24,6 +24,9 @@ import org.apache.spark.SparkContext
 import org.apache.spark.mllib.feature.{Word2Vec, Word2VecModel}
 // $example off$
 
+/**
+ * Word2vec 示例
+ */
 object Word2VecExample {
 
   def main(args: Array[String]): Unit = {

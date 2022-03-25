@@ -40,6 +40,16 @@ import org.apache.spark.mllib.linalg.distributed.{MatrixEntry, RowMatrix}
  *
  * bin/run-example mllib.CosineSimilarity \
  * --threshold 0.1 data/mllib/sample_svm_data.txt
+ *
+ * 使用余弦相似度计算矩阵的相似列。
+ * 输入矩阵必须以面向行的密集格式存储，每行一行，其条目由空格分隔。例如，
+ * 0.5 1.0
+ * 2.0 3.0
+ * 4.0 5.0
+ *
+ * 表示一个 3×2 矩阵，其第一行是 (0.5, 1.0)。
+ * 示例调用：
+ * bin/run-example mllib.CosineSimilarity \ --threshold 0.1 data/mllib/sample_svm_data.txt
  */
 object CosineSimilarity {
   case class Params(inputFile: String = null, threshold: Double = 0.1)

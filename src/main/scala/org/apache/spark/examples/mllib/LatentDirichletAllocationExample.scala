@@ -24,6 +24,9 @@ import org.apache.spark.mllib.clustering.{DistributedLDAModel, LDA}
 import org.apache.spark.mllib.linalg.Vectors
 // $example off$
 
+/**
+ * 潜在狄利克雷分配示例
+ */
 object LatentDirichletAllocationExample {
 
   def main(args: Array[String]) {

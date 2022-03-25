@@ -26,6 +26,9 @@ import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.util.MLUtils
 // $example off$
 
+/**
+ * 二进制分类度量示例
+ */
 object BinaryClassificationMetricsExample {
 
   def main(args: Array[String]): Unit = {

@@ -36,20 +36,25 @@ import org.apache.spark.sql.{Row, SparkSession}
  * ./bin/run-example mllib.LDAExample [options] <input>
  * }}}
  * If you use it as a template to create your own app, please use `spark-submit` to submit your app.
+ *
+ * 潜在狄利克雷分配 (LDA) 应用程序示例。运行
+ * ./bin/run-example mllib.LDAExample [options] <input>
+ *
+ * 如果您使用它作为模板来创建自己的应用程序，请使用spark-submit提交您的应用程序。
  */
 object LDAExample {
 
   private case class Params(
-      input: Seq[String] = Seq.empty,
-      k: Int = 20,
-      maxIterations: Int = 10,
-      docConcentration: Double = -1,
-      topicConcentration: Double = -1,
-      vocabSize: Int = 10000,
-      stopwordFile: String = "",
-      algorithm: String = "em",
-      checkpointDir: Option[String] = None,
-      checkpointInterval: Int = 10) extends AbstractParams[Params]
+                             input: Seq[String] = Seq.empty,
+                             k: Int = 20,
+                             maxIterations: Int = 10,
+                             docConcentration: Double = -1,
+                             topicConcentration: Double = -1,
+                             vocabSize: Int = 10000,
+                             stopwordFile: String = "",
+                             algorithm: String = "em",
+                             checkpointDir: Option[String] = None,
+                             checkpointInterval: Int = 10) extends AbstractParams[Params]
 
   def main(args: Array[String]) {
     val defaultParams = Params()
@@ -64,11 +69,11 @@ object LDAExample {
         .action((x, c) => c.copy(maxIterations = x))
       opt[Double]("docConcentration")
         .text(s"amount of topic smoothing to use (> 1.0) (-1=auto)." +
-        s"  default: ${defaultParams.docConcentration}")
+          s"  default: ${defaultParams.docConcentration}")
         .action((x, c) => c.copy(docConcentration = x))
       opt[Double]("topicConcentration")
         .text(s"amount of term (word) smoothing to use (> 1.0) (-1=auto)." +
-        s"  default: ${defaultParams.topicConcentration}")
+          s"  default: ${defaultParams.topicConcentration}")
         .action((x, c) => c.copy(topicConcentration = x))
       opt[Int]("vocabSize")
         .text(s"number of distinct word types to use, chosen by frequency. (-1=all)" +
@@ -76,24 +81,24 @@ object LDAExample {
         .action((x, c) => c.copy(vocabSize = x))
       opt[String]("stopwordFile")
         .text(s"filepath for a list of stopwords. Note: This must fit on a single machine." +
-        s"  default: ${defaultParams.stopwordFile}")
+          s"  default: ${defaultParams.stopwordFile}")
         .action((x, c) => c.copy(stopwordFile = x))
       opt[String]("algorithm")
         .text(s"inference algorithm to use. em and online are supported." +
-        s" default: ${defaultParams.algorithm}")
+          s" default: ${defaultParams.algorithm}")
         .action((x, c) => c.copy(algorithm = x))
       opt[String]("checkpointDir")
         .text(s"Directory for checkpointing intermediate results." +
-        s"  Checkpointing helps with recovery and eliminates temporary shuffle files on disk." +
-        s"  default: ${defaultParams.checkpointDir}")
+          s"  Checkpointing helps with recovery and eliminates temporary shuffle files on disk." +
+          s"  default: ${defaultParams.checkpointDir}")
         .action((x, c) => c.copy(checkpointDir = Some(x)))
       opt[Int]("checkpointInterval")
         .text(s"Iterations between each checkpoint.  Only used if checkpointDir is set." +
-        s" default: ${defaultParams.checkpointInterval}")
+          s" default: ${defaultParams.checkpointInterval}")
         .action((x, c) => c.copy(checkpointInterval = x))
       arg[String]("<input>...")
         .text("input paths (directories) to plain text corpora." +
-        "  Each text file line should hold 1 document.")
+          "  Each text file line should hold 1 document.")
         .unbounded()
         .required()
         .action((x, c) => c.copy(input = c.input :+ x))
@@ -180,13 +185,14 @@ object LDAExample {
 
   /**
    * Load documents, tokenize them, create vocabulary, and prepare documents as term count vectors.
+   *
    * @return (corpus, vocabulary as array, total token count in corpus)
    */
   private def preprocess(
-      sc: SparkContext,
-      paths: Seq[String],
-      vocabSize: Int,
-      stopwordFile: String): (RDD[(Long, Vector)], Array[String], Long) = {
+                          sc: SparkContext,
+                          paths: Seq[String],
+                          vocabSize: Int,
+                          stopwordFile: String): (RDD[(Long, Vector)], Array[String], Long) = {
 
     val spark = SparkSession
       .builder
@@ -229,7 +235,7 @@ object LDAExample {
       .map(_.swap)
 
     (documents,
-      model.stages(2).asInstanceOf[CountVectorizerModel].vocabulary,  // vocabulary
+      model.stages(2).asInstanceOf[CountVectorizerModel].vocabulary, // vocabulary
       documents.map(_._2.numActives).sum().toLong) // total token count
   }
 }

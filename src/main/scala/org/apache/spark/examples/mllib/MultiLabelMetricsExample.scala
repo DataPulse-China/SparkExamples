@@ -24,6 +24,9 @@ import org.apache.spark.mllib.evaluation.MultilabelMetrics
 import org.apache.spark.rdd.RDD
 // $example off$
 
+/**
+ * 多标签指标示例
+ */
 object MultiLabelMetricsExample {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("MultiLabelMetricsExample")

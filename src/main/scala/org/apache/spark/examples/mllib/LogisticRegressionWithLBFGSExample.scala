@@ -26,6 +26,9 @@ import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.util.MLUtils
 // $example off$
 
+/**
+ * 使用 LBFGS 示例的逻辑回归
+ */
 object LogisticRegressionWithLBFGSExample {
 
   def main(args: Array[String]): Unit = {

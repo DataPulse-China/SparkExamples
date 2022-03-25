@@ -18,6 +18,7 @@
 package org.apache.spark.examples.mllib
 
 // scalastyle:off println
+
 import org.apache.spark.{SparkConf, SparkContext}
 // $example on$
 import org.apache.spark.mllib.clustering.BisectingKMeans
@@ -31,6 +32,10 @@ import org.apache.spark.mllib.linalg.{Vector, Vectors}
  * {{{
  * bin/run-example mllib.BisectingKMeansExample
  * }}}
+ *
+ * 在 spark.mllib 中演示二等分 k 均值聚类的示例。
+ * 运行
+ * bin/run-example mllib.BisectingKMeansExample
  */
 object BisectingKMeansExample {
 
@@ -41,6 +46,7 @@ object BisectingKMeansExample {
     // $example on$
     // Loads and parses data
     def parse(line: String): Vector = Vectors.dense(line.split(" ").map(_.toDouble))
+
     val data = sc.textFile("data/mllib/kmeans_data.txt").map(parse).cache()
 
     // Clustering the data into 6 clusters by BisectingKMeans.

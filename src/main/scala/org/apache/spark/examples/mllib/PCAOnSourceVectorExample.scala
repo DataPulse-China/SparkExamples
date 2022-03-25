@@ -27,6 +27,9 @@ import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.rdd.RDD
 // $example off$
 
+/**
+ * 源向量上的 PCA 示例
+ */
 object PCAOnSourceVectorExample {
 
   def main(args: Array[String]): Unit = {

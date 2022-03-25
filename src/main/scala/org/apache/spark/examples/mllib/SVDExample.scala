@@ -28,6 +28,9 @@ import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.linalg.distributed.RowMatrix
 // $example off$
 
+/**
+ * SVD 示例
+ */
 object SVDExample {
 
   def main(args: Array[String]): Unit = {

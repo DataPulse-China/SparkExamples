@@ -32,6 +32,10 @@ import org.apache.spark.mllib.util.MLUtils
  * }}}
  * By default, this loads a synthetic dataset from `data/mllib/sample_linear_regression_data.txt`.
  * If you use it as a template to create your own app, please use `spark-submit` to submit your app.
+ * 用于汇总文件中的多变量数据的示例应用程序。运行
+ * bin/run-example org.apache.spark.examples.mllib.MultivariateSummarizer
+ *
+ * 默认情况下，这会从data/mllib/sample_linear_regression_data.txt加载合成数据集。如果您使用它作为模板来创建自己的应用程序，请使用spark-submit提交您的应用程序。
  */
 object MultivariateSummarizer {
 
@@ -49,11 +53,11 @@ object MultivariateSummarizer {
         .action((x, c) => c.copy(input = x))
       note(
         """
-        |For example, the following command runs this app on a synthetic dataset:
-        |
-        | bin/spark-submit --class org.apache.spark.examples.mllib.MultivariateSummarizer \
-        |  examples/target/scala-*/spark-examples-*.jar \
-        |  --input data/mllib/sample_linear_regression_data.txt
+          |For example, the following command runs this app on a synthetic dataset:
+          |
+          | bin/spark-submit --class org.apache.spark.examples.mllib.MultivariateSummarizer \
+          |  examples/target/scala-*/spark-examples-*.jar \
+          |  --input data/mllib/sample_linear_regression_data.txt
         """.stripMargin)
     }
 

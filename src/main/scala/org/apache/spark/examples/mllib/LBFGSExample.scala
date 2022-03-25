@@ -27,6 +27,9 @@ import org.apache.spark.mllib.optimization.{LBFGS, LogisticGradient, SquaredL2Up
 import org.apache.spark.mllib.util.MLUtils
 // $example off$
 
+/**
+ * LBFGS 示例
+ */
 object LBFGSExample {
 
   def main(args: Array[String]): Unit = {

@@ -25,6 +25,9 @@ import org.apache.spark.mllib.feature.ElementwiseProduct
 import org.apache.spark.mllib.linalg.Vectors
 // $example off$
 
+/**
+ * Elementwise 产品示例
+ */
 object ElementwiseProductExample {
 
   def main(args: Array[String]): Unit = {

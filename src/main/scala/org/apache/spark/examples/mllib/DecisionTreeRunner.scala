@@ -41,7 +41,13 @@ import org.apache.spark.util.Utils
  * If you use it as a template to create your own app, please use `spark-submit` to submit your app.
  *
  * Note: This script treats all features as real-valued (not categorical).
- *       To include categorical features, modify categoricalFeaturesInfo.
+ * To include categorical features, modify categoricalFeaturesInfo.
+ *
+ * 决策树和随机森林的示例运行器。运行
+ * ./bin/run-example org.apache.spark.examples.mllib.DecisionTreeRunner [options]
+ *
+ * 如果您使用它作为模板来创建自己的应用程序，请使用spark-submit提交您的应用程序。
+ * 注意：此脚本将所有特征视为实值（非分类）。要包含分类特征，请修改 categoricalFeaturesInfo。
  */
 object DecisionTreeRunner {
 
@@ -53,21 +59,21 @@ object DecisionTreeRunner {
   import ImpurityType._
 
   case class Params(
-      input: String = null,
-      testInput: String = "",
-      dataFormat: String = "libsvm",
-      algo: Algo = Classification,
-      maxDepth: Int = 5,
-      impurity: ImpurityType = Gini,
-      maxBins: Int = 32,
-      minInstancesPerNode: Int = 1,
-      minInfoGain: Double = 0.0,
-      numTrees: Int = 1,
-      featureSubsetStrategy: String = "auto",
-      fracTest: Double = 0.2,
-      useNodeIdCache: Boolean = false,
-      checkpointDir: Option[String] = None,
-      checkpointInterval: Int = 10) extends AbstractParams[Params]
+                     input: String = null,
+                     testInput: String = "",
+                     dataFormat: String = "libsvm",
+                     algo: Algo = Classification,
+                     maxDepth: Int = 5,
+                     impurity: ImpurityType = Gini,
+                     maxBins: Int = 32,
+                     minInstancesPerNode: Int = 1,
+                     minInfoGain: Double = 0.0,
+                     numTrees: Int = 1,
+                     featureSubsetStrategy: String = "auto",
+                     fracTest: Double = 0.2,
+                     useNodeIdCache: Boolean = false,
+                     checkpointDir: Option[String] = None,
+                     checkpointInterval: Int = 10) extends AbstractParams[Params]
 
   def main(args: Array[String]) {
     val defaultParams = Params()
@@ -113,14 +119,16 @@ object DecisionTreeRunner {
         .action((x, c) => c.copy(useNodeIdCache = x))
       opt[String]("checkpointDir")
         .text(s"checkpoint directory where intermediate node Id caches will be stored, " +
-         s"default: ${defaultParams.checkpointDir match {
-           case Some(strVal) => strVal
-           case None => "None"
-         }}")
+          s"default: ${
+            defaultParams.checkpointDir match {
+              case Some(strVal) => strVal
+              case None => "None"
+            }
+          }")
         .action((x, c) => c.copy(checkpointDir = Some(x)))
       opt[Int]("checkpointInterval")
         .text(s"how often to checkpoint the node Id cache, " +
-         s"default: ${defaultParams.checkpointInterval}")
+          s"default: ${defaultParams.checkpointInterval}")
         .action((x, c) => c.copy(checkpointInterval = x))
       opt[String]("testInput")
         .text(s"input path to test dataset.  If given, option fracTest is ignored." +
@@ -157,21 +165,22 @@ object DecisionTreeRunner {
 
   /**
    * Load training and test data from files.
-   * @param input  Path to input dataset.
-   * @param dataFormat  "libsvm" or "dense"
+   *
+   * @param input      Path to input dataset.
+   * @param dataFormat "libsvm" or "dense"
    * @param testInput  Path to test dataset.
-   * @param algo  Classification or Regression
-   * @param fracTest  Fraction of input data to hold out for testing.  Ignored if testInput given.
-   * @return  (training dataset, test dataset, number of classes),
-   *          where the number of classes is inferred from data (and set to 0 for Regression)
+   * @param algo       Classification or Regression
+   * @param fracTest   Fraction of input data to hold out for testing.  Ignored if testInput given.
+   * @return (training dataset, test dataset, number of classes),
+   *         where the number of classes is inferred from data (and set to 0 for Regression)
    */
   private[mllib] def loadDatasets(
-      sc: SparkContext,
-      input: String,
-      dataFormat: String,
-      testInput: String,
-      algo: Algo,
-      fracTest: Double): (RDD[LabeledPoint], RDD[LabeledPoint], Int) = {
+                                   sc: SparkContext,
+                                   input: String,
+                                   dataFormat: String,
+                                   testInput: String,
+                                   algo: Algo,
+                                   fracTest: Double): (RDD[LabeledPoint], RDD[LabeledPoint], Int) = {
     // Load training data and cache it.
     val origExamples = dataFormat match {
       case "dense" => MLUtils.loadLabeledPoints(sc, input).cache()
@@ -272,16 +281,16 @@ object DecisionTreeRunner {
     params.checkpointDir.foreach(sc.setCheckpointDir)
 
     val strategy
-      = new Strategy(
-          algo = params.algo,
-          impurity = impurityCalculator,
-          maxDepth = params.maxDepth,
-          maxBins = params.maxBins,
-          numClasses = numClasses,
-          minInstancesPerNode = params.minInstancesPerNode,
-          minInfoGain = params.minInfoGain,
-          useNodeIdCache = params.useNodeIdCache,
-          checkpointInterval = params.checkpointInterval)
+    = new Strategy(
+      algo = params.algo,
+      impurity = impurityCalculator,
+      maxDepth = params.maxDepth,
+      maxBins = params.maxBins,
+      numClasses = numClasses,
+      minInstancesPerNode = params.minInstancesPerNode,
+      minInfoGain = params.minInfoGain,
+      useNodeIdCache = params.useNodeIdCache,
+      checkpointInterval = params.checkpointInterval)
     if (params.numTrees == 1) {
       val startTime = System.nanoTime()
       val model = DecisionTree.train(training, strategy)
@@ -355,8 +364,8 @@ object DecisionTreeRunner {
    */
   // scalastyle:off structural.type
   private[mllib] def meanSquaredError(
-      model: { def predict(features: Vector): Double },
-      data: RDD[LabeledPoint]): Double = {
+                                       model: {def predict(features: Vector): Double},
+                                       data: RDD[LabeledPoint]): Double = {
     data.map { y =>
       val err = model.predict(y.features) - y.label
       err * err

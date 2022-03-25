@@ -38,11 +38,19 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
  *
  * To run on your local machine using the two directories `trainingDir` and `testDir`,
  * with updates every 5 seconds, and 2 features per data point, call:
- *    $ bin/run-example mllib.StreamingLogisticRegression trainingDir testDir 5 2
+ * $ bin/run-example mllib.StreamingLogisticRegression trainingDir testDir 5 2
  *
  * As you add text files to `trainingDir` the model will continuously update.
  * Anytime you add text files to `testDir`, you'll see predictions from the current model.
  *
+ * 在一个数据流上训练逻辑回归模型并在另一个流上进行预测，其中数据流作为文本文件到达两个不同的目录。
+ * 文本文件的行必须以(y,[x1,x2,x3,...,xn])形式标记数据点，其中 n 是特征数，y 是二进制标签，n 必须是训练和测试相同。
+ * 用法：StreamingLogisticRegression        要使用两个目录 trainingDir和 testDir在本地计算机上运行，​​每 5 秒更新一次，每个数据点有 2 个特征，
+ * 请调用： $ bin/run-example mllib.StreamingLogisticRegression trainingDir testDir 5 2 当您将文本文件添加到 trainingDir时模型会不断更新。每当您将文本文件添加到 testDir时，您都会看到来自当前模型的预测。
+ */
+
+/**
+ * 流式逻辑回归
  */
 object StreamingLogisticRegression {
 

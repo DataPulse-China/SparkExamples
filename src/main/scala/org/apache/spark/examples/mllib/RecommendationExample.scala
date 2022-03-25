@@ -25,6 +25,9 @@ import org.apache.spark.mllib.recommendation.MatrixFactorizationModel
 import org.apache.spark.mllib.recommendation.Rating
 // $example off$
 
+/**
+ * 推荐示例
+ */
 object RecommendationExample {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("CollaborativeFilteringExample")

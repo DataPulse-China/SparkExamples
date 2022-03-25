@@ -25,6 +25,9 @@ import org.apache.spark.mllib.regression.{LabeledPoint, LinearRegressionWithSGD}
 // $example off$
 import org.apache.spark.sql.SparkSession
 
+/**
+ * 回归指标示例
+ */
 @deprecated("Use ml.regression.LinearRegression and the resulting model summary for metrics",
   "2.0.0")
 object RegressionMetricsExample {

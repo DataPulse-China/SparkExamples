@@ -26,6 +26,9 @@ import org.apache.spark.mllib.regression.LinearRegressionModel
 import org.apache.spark.mllib.regression.LinearRegressionWithSGD
 // $example off$
 
+/**
+ * 带有 SGD 示例的线性回归
+ */
 @deprecated("Use ml.regression.LinearRegression or LBFGS", "2.0.0")
 object LinearRegressionWithSGDExample {
 

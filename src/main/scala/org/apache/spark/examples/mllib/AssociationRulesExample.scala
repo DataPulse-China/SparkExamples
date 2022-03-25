@@ -24,6 +24,9 @@ import org.apache.spark.mllib.fpm.AssociationRules
 import org.apache.spark.mllib.fpm.FPGrowth.FreqItemset
 // $example off$
 
+/**
+ * 关联规则示例
+ */
 object AssociationRulesExample {
 
   def main(args: Array[String]) {

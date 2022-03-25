@@ -24,6 +24,9 @@ import org.apache.spark.mllib.clustering.KMeans
 import org.apache.spark.mllib.linalg.Vectors
 // $example off$
 
+/**
+ * PMML 模型导出示例
+ */
 object PMMLModelExportExample {
 
   def main(args: Array[String]): Unit = {

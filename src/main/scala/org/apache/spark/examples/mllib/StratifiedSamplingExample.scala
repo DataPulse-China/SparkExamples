@@ -20,6 +20,9 @@ package org.apache.spark.examples.mllib
 
 import org.apache.spark.{SparkConf, SparkContext}
 
+/**
+ * 分层抽样示例
+ */
 object StratifiedSamplingExample {
 
   def main(args: Array[String]): Unit = {

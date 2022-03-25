@@ -23,6 +23,9 @@ import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.mllib.fpm.PrefixSpan
 // $example off$
 
+/**
+ * 前缀跨度示例
+ */
 object PrefixSpanExample {
 
   def main(args: Array[String]) {

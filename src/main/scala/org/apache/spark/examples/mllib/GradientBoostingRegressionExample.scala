@@ -26,6 +26,9 @@ import org.apache.spark.mllib.tree.model.GradientBoostedTreesModel
 import org.apache.spark.mllib.util.MLUtils
 // $example off$
 
+/**
+ * 梯度提升回归示例
+ */
 object GradientBoostingRegressionExample {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("GradientBoostedTreesRegressionExample")

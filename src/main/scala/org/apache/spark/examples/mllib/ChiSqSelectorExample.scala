@@ -27,6 +27,9 @@ import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.util.MLUtils
 // $example off$
 
+/**
+ * 卡方选择器示例
+ */
 object ChiSqSelectorExample {
 
   def main(args: Array[String]): Unit = {

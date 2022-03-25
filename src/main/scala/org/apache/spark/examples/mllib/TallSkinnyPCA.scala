@@ -33,6 +33,13 @@ import org.apache.spark.mllib.linalg.Vectors
  * 4.0 5.0
  * }}}
  * represents a 3-by-2 matrix, whose first row is (0.5, 1.0).
+ * 计算高瘦矩阵的主成分，其行是观察值。
+ * 输入矩阵必须以面向行的密集格式存储，每行一行，其条目由空格分隔。例如，
+ * 0.5 1.0
+ * 2.0 3.0
+ * 4.0 5.0
+ *
+ * 表示一个 3×2 矩阵，其第一行是 (0.5, 1.0)。
  */
 object TallSkinnyPCA {
   def main(args: Array[String]) {

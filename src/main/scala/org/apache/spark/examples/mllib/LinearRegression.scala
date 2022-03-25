@@ -33,6 +33,11 @@ import org.apache.spark.mllib.util.MLUtils
  * }}}
  * A synthetic dataset can be found at `data/mllib/sample_linear_regression_data.txt`.
  * If you use it as a template to create your own app, please use `spark-submit` to submit your app.
+ *
+ * 线性回归的示例应用程序。运行
+ * bin/run-example org.apache.spark.examples.mllib.LinearRegression
+ *
+ * 可以在data/mllib/sample_linear_regression_data.txt找到合成数据集。如果您使用它作为模板来创建自己的应用程序，请使用spark-submit提交您的应用程序。
  */
 @deprecated("Use ml.regression.LinearRegression or LBFGS", "2.0.0")
 object LinearRegression {
@@ -45,11 +50,11 @@ object LinearRegression {
   import RegType._
 
   case class Params(
-      input: String = null,
-      numIterations: Int = 100,
-      stepSize: Double = 1.0,
-      regType: RegType = L2,
-      regParam: Double = 0.01) extends AbstractParams[Params]
+                     input: String = null,
+                     numIterations: Int = 100,
+                     stepSize: Double = 1.0,
+                     regType: RegType = L2,
+                     regParam: Double = 0.01) extends AbstractParams[Params]
 
   def main(args: Array[String]) {
     val defaultParams = Params()
@@ -64,7 +69,7 @@ object LinearRegression {
         .action((x, c) => c.copy(stepSize = x))
       opt[String]("regType")
         .text(s"regularization type (${RegType.values.mkString(",")}), " +
-        s"default: ${defaultParams.regType}")
+          s"default: ${defaultParams.regType}")
         .action((x, c) => c.copy(regType = RegType.withName(x)))
       opt[Double]("regParam")
         .text(s"regularization parameter, default: ${defaultParams.regParam}")

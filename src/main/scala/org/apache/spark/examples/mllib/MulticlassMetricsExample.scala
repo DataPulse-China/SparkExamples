@@ -26,6 +26,9 @@ import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.util.MLUtils
 // $example off$
 
+/**
+ * 多类指标示例
+ */
 object MulticlassMetricsExample {
 
   def main(args: Array[String]): Unit = {

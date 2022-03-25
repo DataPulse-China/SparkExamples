@@ -30,6 +30,7 @@ import org.apache.spark.sql.types._
 // $example off:data_types$
 // $example off:programmatic_schema$
 
+
 object SparkSQLExample {
 
   // $example on:create_ds$

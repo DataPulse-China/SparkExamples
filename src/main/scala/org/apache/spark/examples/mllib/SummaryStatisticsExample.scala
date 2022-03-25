@@ -24,6 +24,9 @@ import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.stat.{MultivariateStatisticalSummary, Statistics}
 // $example off$
 
+/**
+ * 汇总统计示例
+ */
 object SummaryStatisticsExample {
 
   def main(args: Array[String]): Unit = {

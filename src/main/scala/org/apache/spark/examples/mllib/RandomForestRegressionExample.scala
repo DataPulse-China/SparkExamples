@@ -25,6 +25,9 @@ import org.apache.spark.mllib.tree.model.RandomForestModel
 import org.apache.spark.mllib.util.MLUtils
 // $example off$
 
+/**
+ * 随机森林回归示例
+ */
 object RandomForestRegressionExample {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("RandomForestRegressionExample")

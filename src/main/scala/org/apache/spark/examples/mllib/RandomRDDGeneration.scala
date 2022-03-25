@@ -28,6 +28,11 @@ import org.apache.spark.rdd.RDD
  * bin/run-example org.apache.spark.examples.mllib.RandomRDDGeneration
  * }}}
  * If you use it as a template to create your own app, please use `spark-submit` to submit your app.
+ *
+ * 随机生成的 RDD 的示例应用程序。运行
+ * bin/run-example org.apache.spark.examples.mllib.RandomRDDGeneration
+ *
+ * 如果您使用它作为模板来创建自己的应用程序，请使用spark-submit提交您的应用程序
  */
 object RandomRDDGeneration {
 
@@ -44,13 +49,13 @@ object RandomRDDGeneration {
     println(s"Generated RDD of ${normalRDD.count()}" +
       " examples sampled from the standard normal distribution")
     println("  First 5 samples:")
-    normalRDD.take(5).foreach( x => println(s"    $x") )
+    normalRDD.take(5).foreach(x => println(s"    $x"))
 
     // Example: RandomRDDs.normalVectorRDD
     val normalVectorRDD = RandomRDDs.normalVectorRDD(sc, numRows = numExamples, numCols = 2)
     println(s"Generated RDD of ${normalVectorRDD.count()} examples of length-2 vectors.")
     println("  First 5 samples:")
-    normalVectorRDD.take(5).foreach( x => println(s"    $x") )
+    normalVectorRDD.take(5).foreach(x => println(s"    $x"))
 
     println()
 

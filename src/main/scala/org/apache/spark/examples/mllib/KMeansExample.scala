@@ -24,6 +24,9 @@ import org.apache.spark.mllib.clustering.{KMeans, KMeansModel}
 import org.apache.spark.mllib.linalg.Vectors
 // $example off$
 
+/**
+ * K 表示示例
+ */
 object KMeansExample {
 
   def main(args: Array[String]) {

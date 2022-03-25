@@ -18,6 +18,7 @@
 // scalastyle:off println
 package org.apache.spark.examples
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.SparkContext
 import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.rdd.RDD
@@ -29,7 +30,7 @@ import org.apache.spark.sql.SparkSession
  */
 object BroadcastTest {
   def main(args: Array[String]): Unit = {
-
+    Logger.getLogger("org").setLevel(Level.WARN)
     val blockSize: String = if (args.length > 2) args(2) else "4096"
 
     val spark: SparkSession = SparkSession

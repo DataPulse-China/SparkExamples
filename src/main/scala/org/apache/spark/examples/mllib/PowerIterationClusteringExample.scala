@@ -49,17 +49,32 @@ import org.apache.spark.rdd.RDD
  * ./bin/run-example mllib.PowerIterationClusteringExample -k 2 --n 10 --maxIterations 15
  *
  * Cluster assignments: 1 -> [0,1,2,3,4,5,6,7,8,9],
- *   0 -> [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]
+ * 0 -> [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]
  *
  * If you use it as a template to create your own app, please use `spark-submit` to submit your app.
+ *
+ * 一个示例 Power Iteration Clustering http://www.icml2010.org/papers/387.pdf 应用程序。输入 K 个同心圆和最内圆中的点数。输出应该是 K 个簇——每个簇精确地包含与每个输入圆相关联的点。
+ * 运行
+ * ./bin/run-example mllib.PowerIterationClusteringExample [options]
+ *
+ * Where options include:
+ * k:  Number of circles/clusters
+ * n:  Number of sampled points on innermost circle.. There are proportionally more points
+ * within the outer/larger circles
+ * maxIterations:   Number of Power Iterations
+ *
+ * 这是一个示例运行和输出：
+ * ./bin/run-example mllib.PowerIterationClusteringExample -k 2 --n 10 --maxIterations 15
+ * 集群分配：1 -> [0,1,2,3,4,5,6,7,8,9], 0 -> [10,11,12,13,14,15,16,17,18, 19,20,21,22,23,24,25,26,27,28,29]
+ * 如果您使用它作为模板来创建自己的应用程序，请使用spark-submit提交您的应用程序。
  */
 object PowerIterationClusteringExample {
 
   case class Params(
-      k: Int = 2,
-      numPoints: Int = 10,
-      maxIterations: Int = 15
-    ) extends AbstractParams[Params]
+                     k: Int = 2,
+                     numPoints: Int = 10,
+                     maxIterations: Int = 15
+                   ) extends AbstractParams[Params]
 
   def main(args: Array[String]) {
     val defaultParams = Params()
@@ -122,9 +137,9 @@ object PowerIterationClusteringExample {
   }
 
   def generateCirclesRdd(
-      sc: SparkContext,
-      nCircles: Int,
-      nPoints: Int): RDD[(Long, Long, Double)] = {
+                          sc: SparkContext,
+                          nCircles: Int,
+                          nPoints: Int): RDD[(Long, Long, Double)] = {
     val points = (1 to nCircles).flatMap { i =>
       generateCircle(i, i * nPoints)
     }.zipWithIndex

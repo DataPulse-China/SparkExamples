@@ -25,6 +25,9 @@ import org.apache.spark.mllib.stat.Statistics
 import org.apache.spark.rdd.RDD
 // $example off$
 
+/**
+ * 相关示例
+ */
 object CorrelationsExample {
 
   def main(args: Array[String]): Unit = {

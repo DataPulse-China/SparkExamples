@@ -26,6 +26,9 @@ import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.linalg.distributed.RowMatrix
 // $example off$
 
+/**
+ * 行矩阵上的 PCA 示例
+ */
 object PCAOnRowMatrixExample {
 
   def main(args: Array[String]): Unit = {

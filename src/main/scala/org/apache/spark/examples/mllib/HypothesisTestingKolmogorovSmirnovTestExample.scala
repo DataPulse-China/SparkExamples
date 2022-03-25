@@ -24,6 +24,9 @@ import org.apache.spark.mllib.stat.Statistics
 import org.apache.spark.rdd.RDD
 // $example off$
 
+/**
+ * 假设检验 Kolmogorov Smirnov 检验示例
+ */
 object HypothesisTestingKolmogorovSmirnovTestExample {
 
   def main(args: Array[String]): Unit = {
