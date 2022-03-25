@@ -124,8 +124,8 @@ object LocalALSBak {
   def rmse(targetR: RealMatrix, ms: Array[RealVector], us: Array[RealVector]): Double = {
     // 实例化一个长度为 M 宽度为 U 的零矩阵
     val r = new Array2DRowRealMatrix(M, U)
-
     for (i <- 0 until M; j <- 0 until U) {
+      // 求ms(i) 与 us(j) 的外积 设置到 r 指定的位置中
       r.setEntry(i, j, ms(i).dotProduct(us(j)))
     }
     val diffs: RealMatrix = r.subtract(targetR)
