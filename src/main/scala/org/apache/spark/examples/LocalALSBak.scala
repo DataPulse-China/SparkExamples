@@ -122,18 +122,25 @@ object LocalALSBak {
    * @return
    */
   def rmse(targetR: RealMatrix, ms: Array[RealVector], us: Array[RealVector]): Double = {
-    // 实例化一个长度为 M 宽度为 U 的零矩阵
+    /**
+     * 实例化一个长度为 M 宽度为 U 的零矩阵
+     */
     val r = new Array2DRowRealMatrix(M, U)
     for (i <- 0 until M; j <- 0 until U) {
       // 求ms(i) 与 us(j) 的外积 设置到 r 指定的位置中
       r.setEntry(i, j, ms(i).dotProduct(us(j)))
     }
+    /**
+     *  求 r 与 R 的差
+     */
     val diffs: RealMatrix = r.subtract(targetR)
     var sumSqs = 0.0
+    // 获取diff中 所有元素二次幂的和 保存到sumSqs中
     for (i <- 0 until M; j <- 0 until U) {
       val diff: Double = diffs.getEntry(i, j)
       sumSqs += diff * diff
     }
+    // 求出平方根:  sumSqs 除以方阵元素数量的结果开平方根
     math.sqrt(sumSqs / (M.toDouble * U.toDouble))
   }
 
