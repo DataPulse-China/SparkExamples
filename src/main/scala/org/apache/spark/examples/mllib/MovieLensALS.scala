@@ -190,7 +190,8 @@ object MovieLensALS {
     //      ((x.user, x.product), mapPredictedRating(x.rating))
     //    }.join(data.map(x => ((x.user, x.product), x.rating))).values
     //    math.sqrt(predictionsAndRatings.map(x => (x._1 - x._2) * (x._1 - x._2)).mean())
-    null
+    //    null
+    1
   }
 }
 // scalastyle:on println
