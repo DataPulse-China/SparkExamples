@@ -30,44 +30,67 @@ import breeze.linalg.{squaredDistance, DenseVector, Vector}
  *
  * This is an example implementation for learning how to use Spark. For more conventional use,
  * please refer to org.apache.spark.ml.clustering.KMeans.
- *
- * K-均值聚类。
- *
- *这是一个学习如何使用Spark的示例实现。对于更常规的用途，
- *请参考org。阿帕奇。火花ml.聚类。KMeans。
+ * K 均值聚类。
+ * 这是学习如何使用 Spark 的示例实现。更常规的使用请参考 org.apache.spark.ml.clustering.KMeans。
  */
 object LocalKMeans {
   val N = 1000
-  val R = 1000    // Scaling factor
+  val R = 1000 // Scaling factor 比例因子
   val D = 10
   val K = 10
   val convergeDist = 0.001
-  val rand = new Random(42)
+  val rand = new Random(42) //固定的随机数种子 保证每次取到的随机数都一样
 
+  /**
+   *
+   * @return 返回了一个N长度,密集向量大小d 填充了随机数 的密集向量数组
+   */
   def generateData: Array[DenseVector[Double]] = {
+    /**
+     * 返回一个 D 大小的密集向量 填充 随机双精度小数 乘以 R 的值
+     *
+     * @param i
+     * @return 返回一个密集向量的数组
+     */
     def generatePoint(i: Int): DenseVector[Double] = {
-      DenseVector.fill(D) {rand.nextDouble * R}
+      // DenseVector.fill(size)(value),在给定大小的向量中填充指定的值
+      DenseVector.fill(D) {
+        rand.nextDouble * R
+      }
     }
+    // 返回从这个数开始 填充 一直到 0 的值
     Array.tabulate(N)(generatePoint)
   }
 
+  /**
+   * 求最接近点
+   *
+   * @param p       密集向量数组中索引下标的元素
+   * @param centers K点
+   * @return
+   */
   def closestPoint(p: Vector[Double], centers: HashMap[Int, Vector[Double]]): Int = {
     var index = 0
     var bestIndex = 0
+    // 获取double的正无穷大的
     var closest = Double.PositiveInfinity
 
     for (i <- 1 to centers.size) {
+      // 取出 centers中 第 i 位的值
       val vCurr = centers.get(i).get
+      // 计算向量p到向量vCurr的平方距离
       val tempDist = squaredDistance(p, vCurr)
       if (tempDist < closest) {
         closest = tempDist
         bestIndex = i
       }
     }
-
     bestIndex
   }
 
+  /**
+   * 显示提示信息
+   */
   def showWarning() {
     System.err.println(
       """WARN: This is a naive implementation of KMeans Clustering and is given as an example!
@@ -79,36 +102,40 @@ object LocalKMeans {
   def main(args: Array[String]) {
 
     showWarning()
+    val data = generateData //密集向量数组
+    var points = new HashSet[Vector[Double]] // 积分
+    var kPoints = new HashMap[Int, Vector[Double]] // K点
+    var tempDist = 1.0 // 温度区
 
-    val data = generateData
-    var points = new HashSet[Vector[Double]]
-    var kPoints = new HashMap[Int, Vector[Double]]
-    var tempDist = 1.0
-
+    /**
+     * 如果积分的大小小于 Ｋ　就向 积分中填充 小于N的随机整数
+     */
     while (points.size < K) {
       points.add(data(rand.nextInt(N)))
     }
-
+    // 获取积分的遍历器
     val iter = points.iterator
+    // 把所有的积分填充到K点中
     for (i <- 1 to points.size) {
       kPoints.put(i, iter.next())
     }
-
+    // 打印初始化信息
     println("Initial centers: " + kPoints)
 
-    while(tempDist > convergeDist) {
-      var closest = data.map (p => (closestPoint(p, kPoints), (p, 1)))
-
-      var mappings = closest.groupBy[Int] (x => x._1)
-
+    // 温度去大于 > 收敛距离
+    while (tempDist > convergeDist) {
+      // 最近的 把密集向量数组的每一个映射成 () 元组
+      var closest = data.map(p => (closestPoint(p, kPoints), (p, 1)))
+      var mappings = closest.groupBy[Int](x => x._1)
       var pointStats = mappings.map { pair =>
-        pair._2.reduceLeft [(Int, (Vector[Double], Int))] {
+        pair._2.reduceLeft[(Int, (Vector[Double], Int))] {
           case ((id1, (p1, c1)), (id2, (p2, c2))) => (id1, (p1 + p2, c1 + c2))
         }
       }
 
-      var newPoints = pointStats.map {mapping =>
-        (mapping._1, mapping._2._1 * (1.0 / mapping._2._2))}
+      var newPoints = pointStats.map { mapping =>
+        (mapping._1, mapping._2._1 * (1.0 / mapping._2._2))
+      }
 
       tempDist = 0.0
       for (mapping <- newPoints) {
