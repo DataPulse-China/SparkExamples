@@ -1,4 +1,4 @@
-import breeze.linalg.{DenseVector, rand, ranks}
+import breeze.linalg.{DenseVector, rand, ranks, squaredDistance}
 
 import java.util.Random
 
@@ -19,6 +19,9 @@ object Test3 {
 
     //    val a = 1.0 / 0
     //    println(a)
-//    println(Vector(1, 2).apply(1))
+    //    println(Vector(1, 2).apply(1))
+    val ints = Vector(1.0, 3)
+    val ints1 = Vector(1.0, 2)
+//    squaredDistance(ints,ints1)
   }
 }
