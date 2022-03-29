@@ -22,7 +22,6 @@ import breeze.linalg.{DenseVector, Vector, squaredDistance}
 
 import java.util.Random
 import scala.collection.mutable
-import scala.collection.mutable.{HashMap, HashSet}
 
 /**
  * K-means clustering.
@@ -48,7 +47,7 @@ object LocalKMeansBak {
     /**
      * 返回一个 D 大小的密集向量 填充 随机双精度小数 乘以 R 的值
      *
-     * @param i
+     * @param i .
      * @return 返回一个密集向量的数组
      */
     def generatePoint(i: Int): DenseVector[Double] = {
@@ -62,18 +61,17 @@ object LocalKMeansBak {
   }
 
   /**
-   * 求最接近点
+   * 求出最近向量的下标
    *
-   * @param p       密集向量数组中索引下标的元素
+   * @param p 密集向量数组中索引下标的元素
    * @param centers K点
    * @return
    */
   def closestPoint(p: Vector[Double], centers: mutable.HashMap[Int, Vector[Double]]): Int = {
-    var index = 0
+    //    var index = 0
     var bestIndex = 0
     // 获取double的正无穷大的
     var closest: Double = Double.PositiveInfinity
-
     for (i <- 1 to centers.size) {
       // 取出 centers中 第 i 位的值
       val vCurr: Vector[Double] = centers(i)
@@ -84,6 +82,7 @@ object LocalKMeansBak {
         bestIndex = i
       }
     }
+    // 返回最小值的坐标
     bestIndex
   }
 
@@ -101,9 +100,9 @@ object LocalKMeansBak {
   def main(args: Array[String]): Unit = {
     showWarning()
     val data: Array[DenseVector[Double]] = generateData //密集向量数组
-    var points = new mutable.HashSet[Vector[Double]] // 积分
-    var kPoints = new mutable.HashMap[Int, Vector[Double]] // K点
-    var tempDist = 1.0 // 温度区
+    val points = new mutable.HashSet[Vector[Double]] // 积分
+    val kPoints = new mutable.HashMap[Int, Vector[Double]] // K点
+    var tempDist = 1.0
 
     /**
      * 如果积分的大小小于 Ｋ　就向 积分中填充 小于N的随机整数
@@ -122,16 +121,17 @@ object LocalKMeansBak {
 
     // 温度去大于 > 收敛距离
     while (tempDist > convergeDist) {
-      // 最近的 把密集向量数组的每一个映射成 () 元组
-      var closest: Array[(Int, (DenseVector[Double], Int))] = data.map(p => (closestPoint(p, kPoints), (p, 1)))
-      var mappings: Map[Int, Array[(Int, (DenseVector[Double], Int))]] = closest.groupBy[Int](x => x._1)
-      var pointStats: Map[Int, (Vector[Double], Int)] = mappings.map { pair =>
+      // 最近的 把密集向量数组的每一个映射成 (p - k 最近的下标, (本向量, 1) ) 元组
+      val closest: Array[(Int, (DenseVector[Double], Int))] = data.map(p => (closestPoint(p, kPoints), (p, 1)))
+      val mappings: Map[Int, Array[(Int, (DenseVector[Double], Int))]] = closest.groupBy[Int](x => x._1)
+      val pointStats: Map[Int, (Vector[Double], Int)] = mappings.map { pair =>
         pair._2.reduceLeft[(Int, (Vector[Double], Int))] {
-          case ((id1, (p1, c1)), (id2, (p2, c2))) => (id1, (p1 + p2, c1 + c2))
+          //  case ((id1, (p1, c1)), (id2, (p2, c2))) => (id1, (p1 + p2, c1 + c2))
+          case ((id1, (p1, c1)), (_, (p2, c2))) => (id1, (p1 + p2, c1 + c2))
         }
       }
 
-      var newPoints: Map[Int, Vector[Double]] = pointStats.map { mapping =>
+      val newPoints: Map[Int, Vector[Double]] = pointStats.map { mapping =>
         (mapping._1, mapping._2._1 * (1.0 / mapping._2._2))
       }
 
