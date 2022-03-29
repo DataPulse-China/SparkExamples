@@ -1,4 +1,6 @@
-import breeze.linalg.{Vector, squaredDistance}
+import breeze.linalg.{DenseVector, Vector, squaredDistance}
+import org.apache.log4j.{Level, Logger}
+import org.apache.spark.{SparkConf, SparkContext}
 
 object Test3 {
   def main(args: Array[String]): Unit = {
@@ -18,12 +20,12 @@ object Test3 {
     //    val a = 1.0 / 0
     //    println(a)
     //    println(Vector(1, 2).apply(1))
-    val ints: Vector[Double] = Vector(2.0, 2, 2, 2)
-    val ints1: Vector[Double] = Vector(4.0, 4, 2, 9)
-    val a: Double = squaredDistance(ints, ints1)
-    println(a)
-    val d: Double = math.pow(2 - 4, 2) + math.pow(2 - 4, 2) + math.pow(2 - 2, 2) + math.pow(2 - 9, 2)
-    println(d)
+    //    val ints: Vector[Double] = Vector(2.0, 2, 2, 2)
+    //    val ints1: Vector[Double] = Vector(4.0, 4, 2, 9)
+    //    val a: Double = squaredDistance(ints, ints1)
+    //    println(a)
+    //    val d: Double = math.pow(2 - 4, 2) + math.pow(2 - 4, 2) + math.pow(2 - 2, 2) + math.pow(2 - 9, 2)
+    //    println(d)
 
     //    向量求两点之间的距离 a (x1,y1), b(x2,y2) , a到b的距离 (x1-x2)^2 + (y1-y2)^2
 
@@ -38,6 +40,21 @@ object Test3 {
     //    val z2 = 1
     //    val i: Int = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2)
     //    println(math.sqrt(i))
+
+    // reduce 和 reduceleft的计算顺序是一样的
+    val i: Int = (1 until 100).reduceLeft[Int] {
+      case (a, b) => {
+        println(s"a = ${a} b = $b")
+        a - b
+      }
+    }
+    println(i)
+
+    val i1: Int = (1 until 100).reduce(_ - _)
+    println(i1)
+
+    val value: DenseVector[Int] = DenseVector.fill(10)(1) + DenseVector.fill(10)(1)
+    println(value)
 
   }
 }

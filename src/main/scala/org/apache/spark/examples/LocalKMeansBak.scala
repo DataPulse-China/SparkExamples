@@ -53,7 +53,7 @@ object LocalKMeansBak {
     def generatePoint(i: Int): DenseVector[Double] = {
       // DenseVector.fill(size)(value),在给定大小的向量中填充指定的值
       DenseVector.fill(D) {
-        rand.nextDouble * R
+        rand.nextDouble * R // 固定随机因子的随机小数 * R
       }
     }
     // 返回从这个数开始 填充 一直到 0 的值
@@ -63,7 +63,7 @@ object LocalKMeansBak {
   /**
    * 求出最近向量的下标
    *
-   * @param p 密集向量数组中索引下标的元素
+   * @param p       密集向量数组中索引下标的元素
    * @param centers K点
    * @return
    */
@@ -121,30 +121,33 @@ object LocalKMeansBak {
 
     // 温度去大于 > 收敛距离
     while (tempDist > convergeDist) {
-      // 最近的 把密集向量数组的每一个映射成 (p - k 最近的下标, (本向量, 1) ) 元组
+      // 最近的 把密集向量数组的每一个映射成 (p -> k 最近的下标, (本向量, 1) ) 元组
       val closest: Array[(Int, (DenseVector[Double], Int))] = data.map(p => (closestPoint(p, kPoints), (p, 1)))
+      // 根据最近的下标进行分组
       val mappings: Map[Int, Array[(Int, (DenseVector[Double], Int))]] = closest.groupBy[Int](x => x._1)
+      // 把分组后结果中的值加起来
       val pointStats: Map[Int, (Vector[Double], Int)] = mappings.map { pair =>
         pair._2.reduceLeft[(Int, (Vector[Double], Int))] {
-          //  case ((id1, (p1, c1)), (id2, (p2, c2))) => (id1, (p1 + p2, c1 + c2))
           case ((id1, (p1, c1)), (_, (p2, c2))) => (id1, (p1 + p2, c1 + c2))
         }
       }
-
-      val newPoints: Map[Int, Vector[Double]] = pointStats.map { mapping =>
+      val newPoints: Map[Int, Vector[Double]] = pointStats.map { mapping => {
+//        (最近的下标, 向量的和 * (1.0 / 向量的个数))
         (mapping._1, mapping._2._1 * (1.0 / mapping._2._2))
+      }
       }
 
       tempDist = 0.0
+      // 计算所有平方距离的和
       for (mapping <- newPoints) {
         tempDist += squaredDistance(kPoints(mapping._1), mapping._2)
       }
 
+      // 插入所有的的值到kPoints
       for (newP <- newPoints) {
         kPoints.put(newP._1, newP._2)
       }
     }
-
     println("Final centers: " + kPoints)
   }
 }
