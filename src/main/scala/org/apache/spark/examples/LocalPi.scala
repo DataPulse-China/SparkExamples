@@ -23,6 +23,7 @@ import scala.math.random
 object LocalPi {
   def main(args: Array[String]) {
     var count = 0
+    // 循环次数越多精度越高
     for (i <- 1 to 100000) {
       val x = random * 2 - 1
       val y = random * 2 - 1

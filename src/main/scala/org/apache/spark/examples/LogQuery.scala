@@ -19,7 +19,10 @@
 package org.apache.spark.examples
 
 import org.apache.log4j.{Level, Logger}
+import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
+
+import scala.util.matching.Regex
 
 /**
  * Executes a roll up-style query against Apache logs.
@@ -44,14 +47,14 @@ object LogQuery {
       | 0 73.23.2.15 images.com 1358492557 - Whatup""".stripMargin.lines.mkString
   )
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     Logger.getLogger("org").setLevel(Level.WARN)
-    val sparkConf = new SparkConf().setMaster("local[*]").setAppName("Log Query")
+    val sparkConf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("Log Query")
     val sc = new SparkContext(sparkConf)
 
-    val dataSet = if (args.length == 1) sc.textFile(args(0)) else sc.parallelize(exampleApacheLogs)
+    val dataSet: RDD[String] = if (args.length == 1) sc.textFile(args(0)) else sc.parallelize(exampleApacheLogs)
     // scalastyle:off
-    val apacheLogRegex ="""^([\d.]+) (\S+) (\S+) \[([\w\d:/]+\s[+\-]\d{4})\] "(.+?)" (\d{3}) ([\d\-]+) "([^"]+)" "([^"]+)".*""".r
+    val apacheLogRegex: Regex ="""^([\d.]+) (\S+) (\S+) \[([\w\d:/]+\s[+\-]\d{4})\] "(.+?)" (\d{3}) ([\d\-]+) "([^"]+)" "([^"]+)".*""".r
     // scalastyle:on
     /** Tracks the total query count and number of aggregate bytes for a particular group. */
     class Stats(val count: Int, val numBytes: Int) extends Serializable {
