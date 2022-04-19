@@ -33,7 +33,7 @@ import scala.collection.immutable
  *
  * 交替最小二乘矩阵分解。这是学习如何使用 Spark 的示例实现。有关更常规的使用，请参阅 org.apache.spark.ml.recommendation.ALS。
  */
-object SparkALS {
+object SparkALSBak {
 
   // Parameters set through command line arguments
   var M = 0 // Number of movies
@@ -66,17 +66,28 @@ object SparkALS {
     math.sqrt(sumSqs / (M.toDouble * U.toDouble))
   }
 
+  /**
+   *
+   * @param i
+   * @param m
+   * @param us
+   * @param R
+   * @return
+   */
   def update(i: Int, m: RealVector, us: Array[RealVector], R: RealMatrix): RealVector = {
     val U: Int = us.length
     val F: Int = us(0).getDimension
+    // F x F 矩阵
     var XtX: RealMatrix = new Array2DRowRealMatrix(F, F)
+    // F 向量
     var Xty: RealVector = new ArrayRealVector(F)
-    // For each user that rated the movie
+    // 对于给电影评分的每个用户
     for (j <- 0 until U) {
       val u: RealVector = us(j)
-      // Add u * u^t to XtX
+      // XtX 添加 u的外积
       XtX = XtX.add(u.outerProduct(u))
       // Add u * rating to Xty
+      //
       Xty = Xty.add(u.mapMultiply(R.getEntry(i, j)))
     }
     // Add regularization coefs to diagonal terms

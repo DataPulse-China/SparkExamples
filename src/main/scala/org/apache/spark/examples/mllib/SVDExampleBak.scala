@@ -19,25 +19,23 @@
 package org.apache.spark.examples.mllib
 
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.SparkConf
-import org.apache.spark.SparkContext
+import org.apache.spark.{SparkConf, SparkContext}
 // $example on$
-import org.apache.spark.mllib.linalg.Matrix
-import org.apache.spark.mllib.linalg.SingularValueDecomposition
-import org.apache.spark.mllib.linalg.Vector
-import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.mllib.linalg.{Matrix, SingularValueDecomposition, Vector, Vectors}
 import org.apache.spark.mllib.linalg.distributed.RowMatrix
 // $example off$
 
 /**
  * SVD 示例
  */
-object SVDExample {
+object SVDExampleBak {
 
   def main(args: Array[String]): Unit = {
     Logger.getLogger("org").setLevel(Level.WARN)
     val conf = new SparkConf().setMaster("local[*]").setAppName("SVDExample")
     val sc = new SparkContext(conf)
+
+
 
     // $example on$
     val data = Array(
@@ -51,6 +49,7 @@ object SVDExample {
 
     // Compute the top 5 singular values and corresponding singular vectors.
     val svd: SingularValueDecomposition[RowMatrix, Matrix] = mat.computeSVD(5, computeU = true)
+
     val U: RowMatrix = svd.U // The U factor is a RowMatrix.
     val s: Vector = svd.s // The singular values are stored in a local dense vector.
     val V: Matrix = svd.V // The V factor is a local dense matrix.

@@ -48,7 +48,7 @@ object TallSkinnySVD {
       System.exit(1)
     }
 
-    val conf = new SparkConf().setAppName("TallSkinnySVD")
+    val conf = new SparkConf().setMaster("local[*]").setAppName("TallSkinnySVD")
     val sc = new SparkContext(conf)
 
     // Load and parse the data file.

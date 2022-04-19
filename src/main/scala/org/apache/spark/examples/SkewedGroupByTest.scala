@@ -18,8 +18,9 @@
 // scalastyle:off println
 package org.apache.spark.examples
 
-import java.util.Random
+import org.apache.spark.rdd.RDD
 
+import java.util.Random
 import org.apache.spark.sql.SparkSession
 
 /**
@@ -27,18 +28,18 @@ import org.apache.spark.sql.SparkSession
  * 通过测试倾斜组
  */
 object SkewedGroupByTest {
-  def main(args: Array[String]) {
-    val spark = SparkSession
+  def main(args: Array[String]): Unit = {
+    val spark: SparkSession = SparkSession
       .builder
       .appName("GroupBy Test")
       .getOrCreate()
 
-    val numMappers = if (args.length > 0) args(0).toInt else 2
-    var numKVPairs = if (args.length > 1) args(1).toInt else 1000
-    val valSize = if (args.length > 2) args(2).toInt else 1000
-    val numReducers = if (args.length > 3) args(3).toInt else numMappers
+    val numMappers: Int = if (args.length > 0) args(0).toInt else 2
+    var numKVPairs: Int = if (args.length > 1) args(1).toInt else 1000
+    val valSize: Int = if (args.length > 2) args(2).toInt else 1000
+    val numReducers: Int = if (args.length > 3) args(3).toInt else numMappers
 
-    val pairs1 = spark.sparkContext.parallelize(0 until numMappers, numMappers).flatMap { p =>
+    val pairs1: RDD[(Int, Array[Byte])] = spark.sparkContext.parallelize(0 until numMappers, numMappers).flatMap { p =>
       val ranGen = new Random
 
       // map output sizes linearly increase from the 1st to the last
