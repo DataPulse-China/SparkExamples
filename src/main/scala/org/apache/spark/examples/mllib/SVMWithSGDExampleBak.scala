@@ -30,7 +30,6 @@ object SVMWithSGDExampleBak {
     val sameModel = SVMModel.load(sc, "target/tmp/scalaSVMWithSGDModel")
     sc.stop()
 
-
     val svmAlg = new SVMWithSGD()
     svmAlg.optimizer
       .setNumIterations(200)
