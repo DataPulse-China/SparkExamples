@@ -199,6 +199,5 @@ object Test1 {
     abs(a)
 
 
-
   }
 }

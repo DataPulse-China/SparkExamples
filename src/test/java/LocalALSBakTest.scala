@@ -16,8 +16,6 @@
  */
 
 // scalastyle:off println
-package org.apache.spark.examples
-
 import org.apache.commons.math3.linear._
 
 /**
@@ -30,7 +28,7 @@ import org.apache.commons.math3.linear._
  * 这是一个学习如何使用Spark的示例实现。对于更常规的用途，
  * 请参考org.apache.spark.ml.recommendation.ALS.
  */
-object  LocalALSBak {
+object  LocalALSBakTest {
 
   // Parameters set through command line arguments
   /**

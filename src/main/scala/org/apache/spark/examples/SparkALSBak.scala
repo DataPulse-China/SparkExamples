@@ -145,7 +145,7 @@ object SparkALSBak {
 
     // 迭代更新电影然后用户
     // 设置广播变量
-    val Rc: Broadcast[RealMatrix] = sc.broadcast(R)
+    val Rc: Broadcast[asl] = sc.broadcast(R)
     var msb: Broadcast[Array[RealVector]] = sc.broadcast(ms)
     var usb: Broadcast[Array[RealVector]] = sc.broadcast(us)
 
