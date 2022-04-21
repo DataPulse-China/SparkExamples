@@ -40,6 +40,10 @@ import org.apache.spark.mllib.util.MLUtils
  *
  * 合成数据集位于data/mllib/sample_binary_classification_data.txt 。如果您使用它作为模板来创建自己的应用程序，请使用spark-submit提交您的应用程序。
  */
+
+/**
+ * 二进制分类
+ */
 object BinaryClassification {
 
   object Algorithm extends Enumeration {

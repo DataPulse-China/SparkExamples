@@ -26,7 +26,7 @@ import org.apache.spark.rdd.RDD
 // $example off$
 
 /**
- * 相关示例
+ * 相关性示例
  */
 object CorrelationsExample {
 

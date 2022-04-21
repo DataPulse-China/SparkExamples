@@ -36,6 +36,10 @@ import org.apache.spark.mllib.util.MLUtils
  *
  * 默认情况下，这会从data/mllib/sample_linear_regression_data.txt加载合成数据集。如果您使用它作为模板来创建自己的应用程序，请使用spark-submit提交您的应用程序。
  */
+
+/**
+ * 相关性
+ */
 object Correlations {
 
   case class Params(input: String = "data/mllib/sample_linear_regression_data.txt")
@@ -85,7 +89,7 @@ object Correlations {
     var feature = 0
     while (feature < numFeatures) {
       val featureRDD = examples.map(_.features(feature))
-      val corr = Statistics.corr(labelRDD, featureRDD)
+      val corr: Double = Statistics.corr(labelRDD, featureRDD)
       println(s"$feature\t$corr")
       feature += 1
     }

@@ -8,6 +8,9 @@ import org.jfree.data.general.DefaultPieDataset
 import scala.collection.mutable
 import scala.util.matching.Regex
 
+/**
+ * 电影标题的单词整合成了map
+ */
 object SimpleTextFeatures {
   def main(args: Array[String]): Unit = {
     Logger.getLogger("org").setLevel(Level.WARN)

@@ -1,9 +1,8 @@
 package sparklearn
 
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.ml.linalg._
-import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
 import org.jfree.data.general.DefaultPieDataset
 
 import scala.collection.mutable
