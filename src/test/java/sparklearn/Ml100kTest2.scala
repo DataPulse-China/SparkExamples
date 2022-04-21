@@ -35,12 +35,17 @@ object Ml100kTest2 {
     //      .foreach(println)
 
 
-    features.join(features)
-      .map {
-        case (id, (a, b)) => (id, DenseVector(a).dot(DenseVector(b)) / (norm(DenseVector(a) * norm(DenseVector(b)))))
-      }
-      .collect()
-      .foreach(println)
+//    features.join(features)
+//      .map {
+//        case (id, (a, b)) => (id, DenseVector(a).dot(DenseVector(b)) / (norm(DenseVector(a) * norm(DenseVector(b)))))
+//      }
+//      .collect()
+//      .foreach(println)
+
+
+//    val moviesForUser: Seq[Rating] = ratings.keyBy(_.user).lookup(789)
+
+
     context.stop()
   }
 }

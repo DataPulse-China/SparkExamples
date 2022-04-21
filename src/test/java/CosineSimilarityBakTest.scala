@@ -18,13 +18,12 @@
 // scalastyle:off println
 
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.examples.mllib.AbstractParams
 import org.apache.spark.mllib.linalg
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.linalg.distributed.{CoordinateMatrix, MatrixEntry, RowMatrix}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
-import scopt.OptionParser
+import org.apache.spark.examples.mllib.AbstractParams
 
 /**
  * Compute the similar columns of a matrix, using cosine similarity.
